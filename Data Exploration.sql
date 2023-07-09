@@ -45,8 +45,11 @@ WITH hotels AS (
   UNION 
   SELECT * FROM dbo.['2020$'])
 SELECT * FROM hotels
-
--there are 100,756 rows
+LEFT JOIN market_segment$
+ON hotels.market_segment = market_segment$.market_segment
+LEFT JOIN meal_cost$
+ON hotels.meal = meal_cost$.meal
+-->there are 100,756 rows
 
 --Calculate revenue by hotel by years
 
@@ -58,3 +61,6 @@ FROM hotels
 GROUP BY 
 	arrival_date_year,
 	hotel
+--
+
+
