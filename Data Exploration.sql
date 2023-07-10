@@ -71,9 +71,7 @@ END
 ALTER TABLE hotels
 ALTER COLUMN arrival_date_month int
 	
-
 --Join Data - join data with 2 tables to add market segments and meal cost
-	
 SELECT * 
 FROM hotels
 LEFT JOIN market_segment$
@@ -82,7 +80,6 @@ LEFT JOIN meal_cost$
 ON hotels.meal = meal_cost$.meal
 
 --Calculate revenue by hotel by years
-	
 SELECT 
 	arrival_date_year,
 	hotel,
@@ -97,4 +94,17 @@ select reservation_status, arrival_date_year,count(*) from hotels
 group by reservation_status, arrival_date_year
 Order by arrival_date_year, count(*)
 
-
+--
+select arrival_date_year as total_count, [1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12]
+from
+	(select arrival_date_month, count(*) as count, arrival_date_year
+	from hotels
+	group by 
+		arrival_date_month,
+		arrival_date_year
+	) as source
+pivot
+(
+sum(count)
+for arrival_date_month in ([1],[2],[3],[4],[5],[6],[7],[8],[9],[10],[11],[12])
+) as pivottable
